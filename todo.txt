@@ -1,0 +1,6 @@
+§ Check for bugs and error handlings
+§ ShadowJar
+§ Docker
+§ Unit tests
+§ "Sanitize user inputs"
+§ Contributing.md
