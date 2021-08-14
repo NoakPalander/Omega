@@ -20,6 +20,24 @@ Then you can just invite the bot to your server. Finally, clone the repository
 ```bash
 $ git clone https://github.com/NoakPalander/Theta.git
 ```
+## Docker
+Docker isn't required to run this application however it could be beneficial. Otherwise, see "Deploying & usage". There's also an image on [Dockerhub](https://hub.docker.com/r/palander/theta)
+that could be used instead.
+
+### Building without dockerhub
+```bash
+$ docker build -t "palander/theta" .
+```
+
+### Deploying
+```bash
+$ docker run --env-file=.env palander/theta:latest
+```
+
+### Alternatively building with docker hub
+```bash
+$ docker-compose up --build
+```
 
 ## Deploying & usage
 ### Building
@@ -27,6 +45,7 @@ $ git clone https://github.com/NoakPalander/Theta.git
 $ cd Theta
 $ ./gradlew bin # Generates an executable jar file in the "bin" directory
 ```
+On Windows instead run the `gradle.bat` file.
 
 ### Running
 The application needs the bot token and a wolfram alpha api key. These can be supplied either as start arguments or via environment variables. E.g:

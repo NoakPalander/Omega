@@ -1,12 +1,13 @@
-version: '3.8'
+version: '3'
+
 services:
-  theta:
+  bot:
     container_name: Theta
-    image: noakpalander/theta:latest
+    image: palander/theta:latest
     volumes:
       - type: bind
-        source: ./config
-        target: /config
-    restart: always
+        source: ./data
+        target: /home/app/data
+    restart: unless-stopped
     env_file:
       - .env

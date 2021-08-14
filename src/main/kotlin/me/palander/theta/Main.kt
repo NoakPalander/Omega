@@ -16,6 +16,7 @@ import me.palander.theta.util.*
 @KordPreview
 suspend fun main(argv: Array<String>) {
     val (token, wolfram) = tokens(argv)
+    println("Starting the Theta bot!")
 
     val client = Kord(token) {
         intents = Intents(Intent.GuildMessages)

@@ -15,7 +15,7 @@ fun tokens(args: Array<String>): Pair<String, String> {
     // Wolfram api token
     val wolfram = args.getOrNull(1)?.toString()
         ?: System.getenv("WOLFRAM_TOKEN")?.toString()
-        ?: throw IllegalArgumentException("Require a wolfram api-key as 3d start argument or as environment variable!")
+        ?: throw IllegalArgumentException("Require a wolfram api-key as 2d start argument or as environment variable!")
 
     return Pair(token, wolfram)
 }
