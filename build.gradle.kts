@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.jetbrains.kotlin.gradle.tasks.CleanDataTask
 
 object Versions {
     const val BotVersion = "1.0.0"
@@ -60,5 +61,12 @@ tasks.withType<ShadowJar> {
 tasks.register<Copy>("bin") {
     dependsOn("shadowJar")
     from("${rootDir.path}/build/libs/Omega-${Versions.BotVersion}.jar")
-    into("bin/")
+    into("bin")
+}
+
+// Extend the clean task to also delete the bin directory
+tasks.clean {
+    doFirst {
+        File("bin").deleteRecursively()
+    }
 }
