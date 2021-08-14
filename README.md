@@ -1,5 +1,5 @@
 # Ωmega
-<img alt="icon" src="https://raw.githubusercontent.com/NoakPalander/Omega/main/src/main/resources/icon.png" width="200" height="200"/>
+<img alt="icon" src="https://raw.githubusercontent.com/NoakPalander/Omega/main/src/main/resources/logo.png" width="200" height="200"/>
 
 ## Description
 A bot for calculating and evaluating mathematical expressions/equations, and to compile LaTex text into images. Intended for the TPH server, join us at [Discord/TPH](https://discord.gg/programming).
