@@ -1,5 +1,6 @@
-§ Check for bugs and error handlings
-§ Docker
+§ Get versions from the build instead of being hard coded with metadata(?)
+§ Check for bugs and error handling's
 § Unit tests
 § "Sanitize user inputs"
 § Contributing.md
+§ Get a new Omega logo
