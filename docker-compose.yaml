@@ -1,13 +1,13 @@
-version: '3'
+version: '3.8'
 
 services:
   bot:
-    container_name: Theta
-    image: palander/theta:latest
+    container_name: Omega
+    image: palander/omega:latest
     volumes:
       - type: bind
         source: ./data
-        target: /home/app/data
-    restart: unless-stopped
+        target: /data
+    restart: always
     env_file:
       - .env
