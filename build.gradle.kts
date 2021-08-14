@@ -6,6 +6,9 @@
  * User Manual available at https://docs.gradle.org/7.1.1/userguide/building_java_projects.html
  */
 
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 object Versions {
     const val BotVersion = "1.0.0"
     const val Kord = "0.7.4"
@@ -19,6 +22,7 @@ plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     kotlin("jvm") version "1.5.20"
     kotlin("plugin.serialization") version "1.5.0"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 
     // Apply the application plugin to add support for building a CLI application in Java.
     application
@@ -48,4 +52,21 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClass.set("me.palander.theta.MainKt")
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+tasks.withType<ShadowJar> {
+    archiveFileName.set("Theta-${Versions.BotVersion}.jar")
+    manifest {
+        attributes("Main-Class" to "me.palander.theta.MainKt")
+    }
+}
+
+tasks.register<Copy>("bin") {
+    dependsOn("shadowJar")
+    from("${rootDir.path}/build/libs/Theta-${Versions.BotVersion}.jar")
+    into("bin/")
 }

@@ -7,22 +7,17 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.net.URLEncoder
 
-fun tokens(args: Array<String>): Triple<String, Long, String> {
+fun tokens(args: Array<String>): Pair<String, String> {
     val token = args.firstOrNull()
         ?: System.getenv("BOT_TOKEN")
         ?: throw IllegalArgumentException("Require a bot token as 1st start argument or as environment variable!")
 
-    // The guild id
-    val guildId = args.getOrNull(1)?.toLong()
-        ?: System.getenv("GUILD_ID")?.toLong()
-        ?: throw IllegalArgumentException("Require a guild id as 2nd start argument or as environment variable!")
-
     // Wolfram api token
-    val wolfram = args.getOrNull(2)?.toString()
-        ?: System.getenv("WOLFRAM")?.toString()
+    val wolfram = args.getOrNull(1)?.toString()
+        ?: System.getenv("WOLFRAM_TOKEN")?.toString()
         ?: throw IllegalArgumentException("Require a wolfram api-key as 3d start argument or as environment variable!")
 
-    return Triple(token, guildId, wolfram)
+    return Pair(token, wolfram)
 }
 
 fun Color.toAwt(): java.awt.Color = java.awt.Color(rgb)

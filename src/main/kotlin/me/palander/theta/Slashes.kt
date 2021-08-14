@@ -93,15 +93,15 @@ suspend fun InteractionCreateEvent.mathSlash(wolfram: String, botInfo: BotInfo, 
     }
     catch (_: NullPointerException) {
         res.followUp {
-            content = "Request failed.."
+            content = "Request failed. Perhaps the input wasn't valid?"
         }
     }
 }
 
 @KordPreview
-suspend fun setupSlashes(client: Kord, guildId: Snowflake) {
+suspend fun setupSlashes(client: Kord) {
 // Creates the slash commands
-    client.slashCommands.createGuildApplicationCommands(guildId) {
+    client.slashCommands.createGlobalApplicationCommands {
         // Latex command
         command("tex", "Sends a compiled LaTex message") {
             // Input argument, the string the user wants to turn into a LaTex image

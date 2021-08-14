@@ -2,12 +2,12 @@ package me.palander.theta
 
 import dev.kord.common.Color
 import dev.kord.common.annotation.KordPreview
-import dev.kord.common.entity.Snowflake
 import dev.kord.core.Kord
 import dev.kord.core.behavior.channel.createEmbed
 import dev.kord.core.event.interaction.InteractionCreateEvent
 import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.on
+import dev.kord.gateway.Intent
 import dev.kord.gateway.Intents
 import dev.kord.gateway.PrivilegedIntent
 import me.palander.theta.util.*
@@ -15,12 +15,12 @@ import me.palander.theta.util.*
 @PrivilegedIntent
 @KordPreview
 suspend fun main(argv: Array<String>) {
-    val (token, guildId, wolfram) = tokens(argv)
+    val (token, wolfram) = tokens(argv)
 
     val client = Kord(token) {
-        intents = Intents.all
+        intents = Intents(Intent.GuildMessages)
     }.also {
-        setupSlashes(it, Snowflake(guildId))
+        setupSlashes(it)
     }
 
     // Bot information and versioning

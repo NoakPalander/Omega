@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  theta:
+    container_name: Theta
+    image: noakpalander/theta:latest
+    volumes:
+      - type: bind
+        source: ./config
+        target: /config
+    restart: always
+    env_file:
+      - .env
