@@ -3,4 +3,3 @@
 § Unit tests
 § "Sanitize user inputs"
 § Contributing.md
-§ Get a new Omega logo

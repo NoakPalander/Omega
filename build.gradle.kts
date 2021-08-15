@@ -1,6 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.jetbrains.kotlin.gradle.tasks.CleanDataTask
 
 object Versions {
     const val BotVersion = "1.0.0"
@@ -9,6 +8,7 @@ object Versions {
     const val Slf4j = "1.7.32"
     const val Datetime = "0.2.1"
     const val Ktor = "1.6.2"
+    const val Kotlin = "1.5.20"
 }
 
 plugins {
@@ -48,6 +48,32 @@ application {
 }
 
 tasks.withType<KotlinCompile> {
+    // Generate version object at compile time
+    doFirst {
+        val pkg = "${rootDir.path}/src/main/kotlin/me/palander/meta"
+        mkdir(pkg)
+
+        File("$pkg/Versions.kt").writeText("""
+            package me.palander.meta
+            
+            val versions = Versions("${Versions.BotVersion}", "${Versions.Kord}", "${Versions.LatexMath}", "${Versions.Kotlin}")
+            
+            data class Versions(
+                val bot: String,
+                val kord: String,
+                val latex: String,
+                val kotlin: String
+            ) {
+                override fun toString() = "```\n" +
+                    "Bot: ${"$"}bot\n" +
+                    "Kord: ${"$"}kord\n" +
+                    "Latex: ${"$"}latex\n" +
+                    "Kotlin: ${"$"}kotlin\n" +
+                    "```"
+            }
+        """.trimIndent())
+    }
+
     kotlinOptions.jvmTarget = "1.8"
 }
 
@@ -67,6 +93,7 @@ tasks.register<Copy>("bin") {
 // Extend the clean task to also delete the bin directory
 tasks.clean {
     doFirst {
+        File("src/main/kotlin/me/palander/meta").deleteRecursively()
         File("bin").deleteRecursively()
     }
 }

@@ -10,6 +10,7 @@ import dev.kord.core.on
 import dev.kord.gateway.Intent
 import dev.kord.gateway.Intents
 import dev.kord.gateway.PrivilegedIntent
+import me.palander.meta.versions
 import me.palander.omega.util.*
 
 @PrivilegedIntent
@@ -25,12 +26,7 @@ suspend fun main(argv: Array<String>) {
     }
 
     // Bot information and versioning
-    val botInfo = BotInfo(
-        Versions(bot = "1.0.0", kord = "0.7.4", latex = "1.0.7", serialization = "1.5.0", datetime = "0.2.1",
-            kotlin = KotlinVersion.CURRENT.toString()),
-
-        Signature(tag = client.getSelf().tag, color = Color(0x5D3FD3), avatar = client.getSelf().avatar.url)
-    )
+    val botInfo = BotInfo(versions, Signature(tag = client.getSelf().tag, color = Color(0x5D3FD3), avatar = client.getSelf().avatar.url))
 
     client.on<MessageCreateEvent> {
         // If the bot is mentioned, display signature embed
